@@ -1,0 +1,56 @@
+#/bin/bash
+#
+#  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+#  Copyright (C) 2022  Marius Konitzer
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+if [ $# -eq 0 ] ; then
+    echo "Usage: $0 BARCODE..."
+    exit 2
+fi
+
+while (( "$#" )) ; do
+    TAPEDIR=$1
+    if [ -e "$TAPEDIR" ] ; then
+        echo "Tape directory $TAPEDIR already exists."
+        shift
+        continue
+    fi
+
+    echo "Creating directory ${TAPEDIR}"
+    mkdir "$TAPEDIR" || exit 1
+
+    echo "* symlinking cover"
+    ln -s ../.ultrium_cover_template.tex "${TAPEDIR}/cover.tex"
+
+    echo "* symlinking booklet"
+    ln -s ../.ultrium_booklet_template.tex "${TAPEDIR}/booklet.tex"
+
+    echo "* creating sg_logs directory"
+    mkdir "${TAPEDIR}/sg_logs" && \
+        touch "${TAPEDIR}/sg_logs/.gitignore"   # to have a visible dir for git
+
+    echo "* creating empty tape header"
+    touch "${TAPEDIR}/inc_header.tex"
+
+    echo "* creating empty tape statistics"
+    touch "${TAPEDIR}/inc_stats.tex"
+
+    echo "* creating empty tape contents"
+    touch "${TAPEDIR}/inc_content.tex"
+
+    shift
+done

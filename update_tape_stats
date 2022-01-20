@@ -1,0 +1,64 @@
+#/bin/bash
+#
+#  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+#  Copyright (C) 2022  Marius Konitzer
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+if [ $# -ne 2 ] ; then
+    echo "Usage: $0 TAPEDEV BARCODE"
+    exit 2
+fi
+
+TAPEDEV="$1"
+TAPEDIR="$2"
+STATSFILE="${TAPEDIR}"/inc_stats.tex
+SGLOGSDIR="${TAPEDIR}"/sg_logs
+
+if [ ! -d "$TAPEDIR" ] || [ ! -f "$STATSFILE" ] || [ ! -d "$SGLOGSDIR" ] ; then
+    echo "Tape directory $TAPEDIR does not exist or is invalid."
+    exit 1
+fi
+
+CURDATE=$( date +%Y-%m-%d\ %H:%M:%S ) || exit 1
+LOGFILE="$SGLOGSDIR"/"${CURDATE}.out"
+
+echo -n "Retrieving sg_logs from $TAPEDEV into $LOGFILE ... "
+SGLCMD="sudo /usr/bin/sg_logs --readonly --all \"$TAPEDEV\" >> \"$LOGFILE\""
+echo $SGLCMD > "$LOGFILE" || exit 1
+eval $SGLCMD || exit 1
+echo "done"
+
+LOADS=`grep "Thread count:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+WDS=`grep "Total data sets written:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+WRETR=`grep "Total write retries:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+WERR=`grep "Total unrecovered write errors:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+WSUSP=`grep "Total suspended writes:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+WFSUSP=`grep "Total fatal suspended writes:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+RDS=`grep "Total data sets read:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+RRETR=`grep "Total read retries:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+RERR=`grep "Total unrecovered read errors:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+RSUSP=`grep "Total suspended reads:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+RFSUSP=`grep "Total fatal suspended reads:" "$LOGFILE" | sed 's/^[^:]\+: //'`
+
+echo -n "Updating tape statistics file $STATSFILE ... "
+echo "\newcommand{\tapestats}{" > "$STATSFILE"
+echo "Tape last written:	\hfill \tapewritten	&Tape loads:		\hfill ${LOADS}\\\\" >> "$STATSFILE"
+echo "Data sets written:	\hfill ${WDS}	  &Data sets read:		\hfill ${RDS}\\\\" >> "$STATSFILE"
+echo "Write retries:		\hfill ${WRETR}   &Read retries:		\hfill ${RRETR}\\\\" >> "$STATSFILE"
+echo "Unrecovered write errors:	\hfill ${WERR}    &Unrecovered read errors:	\hfill ${RERR}\\\\" >> "$STATSFILE"
+echo "Suspended writes:		\hfill ${WSUSP}   &Suspended reads:		\hfill ${RSUSP}\\\\" >> "$STATSFILE"
+echo "Fatal suspended writes:	\hfill ${WFSUSP}  &Fatal suspended reads:	\hfill ${RFSUSP}}" >> "$STATSFILE"
+echo "done"

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+#
+#  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+#  Copyright (C) 2022  Marius Konitzer
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+import sys
+from os import path
+from datetime import datetime
+
+
+def raw_default(prompt, default=None):
+    if default:
+        prompt = f"{prompt} [{default}]: "
+    else:
+        prompt = f"{prompt}: "
+    sys.stderr.write(prompt)
+    sys.stderr.flush()
+    res = input()
+    if not res and default:
+        return default
+    return res
+
+
+# Replacement values
+rpl = dict(
+    tapename = "",
+    tapeserno = "",
+    tapetype = "LTO-4",
+    tapeformat = "800~GB, \\unit[256]{KiB} block size",
+    tapewritten = datetime.now().strftime("%Y-%m-%d"),
+)
+
+# Descriptions of replacement values
+desc = dict(
+    tapename = "Barcode",
+    tapeserno = "Cartridge Serial No.",
+    tapetype = "Type",
+    tapeformat = "Format",
+    tapewritten = "Write Date",
+)
+
+if len(sys.argv) != 2:
+    sys.stderr.write(f"Usage: {sys.argv[0]} BARCODE\n")
+    sys.exit(2)
+
+# Build and check tape header file
+headerfile = path.join(sys.argv[1], "inc_header.tex")
+if not path.exists(headerfile):
+    sys.stderr.write(f"Tape header file {headerfile} does not exist.\n")
+    sys.exit(1)
+
+# Read in replacement values
+rpl["tapename"] = path.basename(path.normpath(sys.argv[1]))
+for key in ["tapeserno", "tapetype", "tapeformat", "tapewritten"]:
+    rpl[key] = raw_default(desc[key], rpl[key])
+
+# Update tape header file
+f = open(headerfile, 'w')
+f.write("\\newcommand{\\tapename}{%s}\n" % (rpl["tapename"]))
+f.write("\\newcommand{\\tapeserno}{%s}\n" % (rpl["tapeserno"]))
+f.write("\\newcommand{\\tapetype}{%s}\n" % (rpl["tapetype"]))
+f.write("\\newcommand{\\tapeformat}{%s}\n" % (rpl["tapeformat"]))
+f.write("\\newcommand{\\tapewritten}{%s}\n" % (rpl["tapewritten"]))
+f.close()
+
+sys.stderr.write(f"Tape header file {headerfile} updated.\n")

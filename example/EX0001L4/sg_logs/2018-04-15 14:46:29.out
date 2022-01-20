@@ -1,0 +1,470 @@
+sudo /usr/bin/sg_logs --readonly --all "/dev/nst0" >> "EX0001L4/sg_logs/2018-04-15 14:46:29.out"
+    IBM       ULT3580-TD4       C7QH
+
+Supported log pages  [0x0]:
+    0x00        Supported log pages [sp]
+    0x02        Write error [we]
+    0x03        Read error [re]
+    0x06        Non medium [nm]
+    0x0c        Sequential access device [sad]
+    0x11        DT Device status [dtds]
+    0x14        Device statistics [ds]
+    0x16        Tape diagnostic data [tdd]
+    0x2e        Tape alert [ta]
+    0x30        Tape usage (lto-5, 6) [tu_]
+    0x31        Tape capacity (lto-5, 6) [tc_]
+    0x32        Data compression (lto-5) [dc_]
+    0x33        Write errors (lto-5) [we_]
+    0x34        Read forward errors (lto-5) [rfe_]
+    0x37        Performance characteristics (lto-5) [pc_]
+    0x38        Blocks/bytes transferred (lto-5) [bbt_]
+    0x39        Host port 0 interface errors (lto-5) [hp0_]
+    0x3b        Host port 1 interface errors (lto-5) [hp1_]
+    0x3c        Drive usage information (lto-5) [dui_]
+    0x3d        Subsystem statistics (lto-5) [ss_]
+
+Write error counter page  [0x2]
+  Errors corrected without substantial delay = 0
+  Errors corrected with possible delays = 0
+  Total rewrites or rereads = 0
+  Total errors corrected = 0
+  Total times correction algorithm processed = 0
+  Total bytes processed = 0
+  Total uncorrected errors = 0
+  Reserved or vendor specific [0x8000] = 0
+  Reserved or vendor specific [0x8001] = 0
+
+Read error counter page  [0x3]
+  Errors corrected without substantial delay = 0
+  Errors corrected with possible delays = 0
+  Total rewrites or rereads = 0
+  Total errors corrected = 0
+  Total times correction algorithm processed = 0
+  Total bytes processed = 0
+  Total uncorrected errors = 0
+  Reserved or vendor specific [0x8000] = 0
+
+Non-medium error page  [0x6]
+  Non-medium error count = 0
+
+Sequential access device page (ssc-3)
+  Data bytes received with WRITE commands: 0 GB
+  Data bytes written to media by WRITE commands: 0 GB
+  Data bytes read from media by READ commands: 0 GB
+  Data bytes transferred by READ commands: 0 GB
+  Cleaning action not required (or completed)
+  Vendor specific parameter [0x8000] value: 1246399
+  Vendor specific parameter [0x8001] value: 11410
+  Vendor specific parameter [0x8002] value: 11
+  Vendor specific parameter [0x8003] value: 130410031
+
+DT device status page (ssc-3, adc-3) [0x11]
+  Very high frequency data:
+  PAMR=0 HUI=0 MACC=1 CMPR=0 WRTP=1 CRQST=0 CRQRD=0 DINIT=1
+  INXTN=0 RAA=0 MPRSNT=1 MSTD=1 MTHRD=1 MOUNTED=1
+  DT device activity: No DT device activity
+  VS=0 TDDEC=0 EPP=0 ESR=0 RRQST=0 INTFC=0 TAFC=0
+  Very high frequency polling delay:  500 milliseconds
+  Primary port 1 status:
+    non-SAS transport, in hex:
+ 00     2b 00 00 c5 00 00 00 17                             +.......
+  Primary port 2 status:
+    non-SAS transport, in hex:
+ 00     00 00 00 00 00 00 00 7e                             .......~
+  Vendor specific [parameter_code=0x8000]:
+ 00     80 00 43 08 00 00 00 00  00 00 00 00                ..C.........
+  Vendor specific [parameter_code=0x8001]:
+ 00     80 01 43 04 0c 45 00 00                             ..C..E..
+  Vendor specific [parameter_code=0x8100]:
+ 00     81 00 43 04 00 01 00 00                             ..C.....
+  Vendor specific [parameter_code=0x9101]:
+ 00     91 01 43 04 00 00 00 00                             ..C.....
+  Vendor specific [parameter_code=0x9102]:
+ 00     91 02 43 04 00 00 00 00                             ..C.....
+  Vendor specific [parameter_code=0xe000]:
+ 00     e0 00 43 ff 00 00 00 00  00 00 00 00 00 00 00 00    ..C.............
+ 10     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 20     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 30     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 40     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 50     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 60     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 70     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 80     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 90     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ a0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ b0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ c0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ d0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ e0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ f0     00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00    ................
+ 100    00 00 00                                            ...
+
+Device statistics page (ssc-3 and adc)
+  Lifetime media loads: 11410
+  Lifetime cleaning operations: 11
+  Lifetime power on hours: 36226
+  Lifetime media motion (head) hours: 1650
+  Lifetime metres of tape processed: 26730420
+  Lifetime media motion (head) hours when incompatible media last loaded: 1634
+  Lifetime power on hours when last temperature condition occurred: 0
+  Lifetime power on hours when last power consumption condition occurred: 0
+  Media motion (head) hours since last successful cleaning operation: 17
+  Media motion (head) hours since 2nd to last successful cleaning: 160
+  Media motion (head) hours since 3rd to last successful cleaning: 334
+  Lifetime power on hours when last operator initiated forced reset
+    and/or emergency eject occurred: 0
+  Media motion (head) hours for each medium type:
+    Density code: 0x42, Medium type: 0x28
+      Medium motion hours: 1
+    Density code: 0x44, Medium type: 0x38
+      Medium motion hours: 1039
+    Density code: 0x44, Medium type: 0x3c
+      Medium motion hours: 0
+    Density code: 0x46, Medium type: 0x48
+      Medium motion hours: 611
+    Density code: 0x46, Medium type: 0x4c
+      Medium motion hours: 0
+
+Tape diagnostics data page (ssc-3) [0x16]
+  Parameter code: 0
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 1
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 2
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 3
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 4
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 5
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 6
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 7
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 8
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 9
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 10
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+  Parameter code: 11
+    Density code: 0x0
+    Medium type: 0x0
+    Lifetime media motion hours: 0
+    Repeat: 0
+    Sense key: 0x0 [No Sense]
+    Additional sense code: 0x0
+    Additional sense code qualifier: 0x0
+    Vendor specific code qualifier: 0x0
+    Product revision level: 0
+    Hours since last clean: 0
+    Operation code: 0x0
+    Service action: 0x0
+    Medium id number is 32 bytes of zero
+    Timestamp origin: 0x0
+    Timestamp is all zeros:
+
+Tape alert page (ssc-3) [0x2e]
+  Read warning: 0
+  Write warning: 0
+  Hard error: 0
+  Media: 0
+  Read failure: 0
+  Write failure: 0
+  Media life: 0
+  Not data grade: 0
+  Write protect: 0
+  No removal: 0
+  Cleaning media: 0
+  Unsupported format: 0
+  Recoverable mechanical cartridge failure: 0
+  Unrecoverable mechanical cartridge failure: 0
+  Memory chip in cartridge failure: 0
+  Forced eject: 0
+  Read only format: 0
+  Tape directory corrupted on load: 0
+  Nearing media life: 0
+  Cleaning required: 0
+  Cleaning requested: 0
+  Expired cleaning media: 0
+  Invalid cleaning tape: 0
+  Retension requested: 0
+  Dual port interface error: 0
+  Cooling fan failing: 0
+  Power supply failure: 0
+  Power consumption: 0
+  Drive maintenance: 0
+  Hardware A: 0
+  Hardware B: 0
+  Interface: 0
+  Eject media: 0
+  Microcode update fail: 0
+  Drive humidity: 0
+  Drive temperature: 0
+  Drive voltage: 0
+  Predictive failure: 0
+  Diagnostics required: 0
+  Obsolete (28h): 0
+  Obsolete (29h): 0
+  Obsolete (2Ah): 0
+  Obsolete (2Bh): 0
+  Obsolete (2Ch): 0
+  Obsolete (2Dh): 0
+  Obsolete (2Eh): 0
+  Reserved (2Fh): 0
+  Reserved (30h): 0
+  Reserved (31h): 0
+  Lost statistics: 0
+  Tape directory invalid at unload: 0
+  Tape system area write failure: 0
+  Tape system area read failure: 0
+  No start of data: 0
+  Loading failure: 0
+  Unrecoverable unload failure: 0
+  Automation interface failure: 0
+  Firmware failure: 0
+  WORM medium - integrity check failed: 0
+  WORM medium - overwrite attempted: 0
+  Reserved parameter code 0x3d, flag: 0
+  Reserved parameter code 0x3e, flag: 0
+  Reserved parameter code 0x3f, flag: 0
+  Reserved parameter code 0x40, flag: 0
+
+Tape usage page  (LTO-5 and LTO-6 specific) [0x30]
+  Thread count: 84
+  Total data sets written: 5156661
+  Total write retries: 50
+  Total unrecovered write errors: 0
+  Total suspended writes: 159
+  Total fatal suspended writes: 0
+  Total data sets read: 17338
+  Total read retries: 0
+  Total unrecovered read errors: 0
+  Total suspended reads: 0
+  Total fatal suspended reads: 0
+
+Tape capacity page  (LTO-5 and LTO-6 specific) [0x31]
+  Main partition remaining capacity (in MiB): 66948
+  Alternate partition remaining capacity (in MiB): 0
+  Main partition maximum capacity (in MiB): 762939
+  Alternate partition maximum capacity (in MiB): 0
+
+Data compression page  (LTO-5 specific) [0x32]
+  Read compression ratio x100: 0
+  Write compression ratio x100: 0
+  Megabytes transferred to server: 0
+  Bytes transferred to server: 0
+  Megabytes read from tape: 0
+  Bytes read from tape: 0
+  Megabytes transferred from server: 0
+  Bytes transferred from server: 0
+  Megabytes written to tape: 0
+  Bytes written to tape: 0
+
+Unable to decode page = 0x33, here is hex:
+ 00     33 00 00 6c 00 00 40 02  00 00 00 01 40 02 00 00
+ 10     00 02 40 02 00 00 00 03  40 02 00 00 00 04 40 02
+ 20     00 00 00 05 40 02 00 00  00 06 40 02 00 00 00 07
+ 30     40 02 00 00 00 08 40 02  00 00 00 09 40 02 00 00
+ 40     00 0a 40 02 00 00 00 0b  40 02 00 00 00 0c 40 02
+ 50     00 00 00 0d 40 02 00 00  00 0e 40 02 00 00 00 0f
+ 60     40 02 00 00 00 10 40 02  00 00 00 11 40 02 00 00
+
+Unable to decode page = 0x34, here is hex:
+ 00     34 00 00 ba 00 00 40 02  00 00 00 01 40 02 00 00
+ 10     00 02 40 02 00 00 00 03  40 02 00 00 00 04 40 02
+ 20     00 00 00 05 40 02 00 00  00 06 40 02 00 00 00 07
+ 30     40 02 00 00 00 08 40 02  00 00 00 09 40 02 00 00
+ .....  [truncated after 64 of 190 bytes (use '-H' to see the rest)]
+
+Unable to decode page = 0x37, here is hex:
+ 00     37 00 00 1e 00 00 60 01  23 00 01 60 01 05 00 10
+ 10     60 01 7c 00 11 60 01 7c  00 12 60 01 00 00 1a 60
+ 20     01 00
+
+Unable to decode page = 0x38, here is hex:
+ 00     38 00 00 8a 00 00 40 04  00 00 00 00 00 01 40 04
+ 10     00 00 00 00 00 02 40 04  00 00 00 00 00 03 40 04
+ 20     00 00 00 00 00 04 40 04  00 00 00 00 00 05 40 04
+ 30     00 00 00 00 00 06 40 04  00 00 00 00 00 07 40 04
+ .....  [truncated after 64 of 142 bytes (use '-H' to see the rest)]
+
+Unable to decode page = 0x39, here is hex:
+ 00     39 00 00 26 00 00 40 02  00 00 00 07 40 02 00 00
+ 10     00 08 40 02 00 00 00 09  40 02 00 00 00 0a 40 02
+ 20     00 00 00 10 40 04 00 00  00 00
+
+Unable to decode page = 0x3b, here is hex:
+ 00     3b 00 00 26 00 00 40 02  00 00 00 07 40 02 00 00
+ 10     00 08 40 02 00 00 00 09  40 02 00 00 00 0a 40 02
+ 20     00 00 00 10 40 04 00 00  00 00
+
+Unable to decode page = 0x3c, here is hex:
+ 00     3c 00 00 aa 00 01 40 08  00 00 00 00 05 30 04 21
+ 10     00 02 40 08 00 00 00 00  00 00 00 b0 00 03 40 08
+ 20     00 00 00 00 02 b7 d3 59  00 04 40 08 00 00 00 00
+ 30     01 c5 0a df 00 05 40 08  00 00 00 00 00 00 00 1a
+ .....  [truncated after 64 of 174 bytes (use '-H' to see the rest)]
+
+Unable to decode page = 0x3d, here is hex:
+ 00     3d 00 01 08 00 20 40 04  00 00 00 54 00 21 40 04
+ 10     00 77 42 8c 00 22 40 04  00 00 66 a6 00 40 40 04
+ 20     00 00 2c 92 00 41 40 04  07 f3 07 b0 00 42 40 04
+ 30     04 2a 89 10 00 60 40 04  00 00 00 0b 00 61 40 04
+ .....  [truncated after 64 of 268 bytes (use '-H' to see the rest)]

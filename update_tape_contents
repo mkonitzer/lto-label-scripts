@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+#
+#  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+#  Copyright (C) 2022  Marius Konitzer
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+import sys
+from os import path
+
+
+def sizeof_fmt(num):
+    for x in ['B','kB','MB','GB','TB','PB']:
+        if num < 1000.0:
+            return "\\unit[%3.1f]{%s}" % (num, x)
+        num /= 1000.0
+
+
+if len(sys.argv) < 3:
+    sys.stderr.write(f"Usage: {sys.argv[0]} BARCODE FILE...\n")
+    sys.exit(2)
+
+# Build and check tape content file
+cntfile = path.join(sys.argv[1], "inc_content.tex")
+if not path.exists(cntfile):
+    sys.stderr.write(f"Tape content file {cntfile} does not exist.\n")
+    sys.exit(1)
+
+# Check all files' existence
+for fpath in sys.argv[2:]:
+    if not path.exists(fpath):
+        sys.stderr.write(f"File {fpath} does not exist.\n")
+        sys.exit(1)
+
+# Update tape content
+f = open(cntfile, 'w')
+
+# List single files
+total = 0
+f.write("\\newcommand{\\tapecontent}{\n")
+for num in range(2, len(sys.argv)):
+    fpath = sys.argv[num]
+    fsize = path.getsize(fpath)
+    total += fsize
+    if num == 68:
+        f.write("$\ldots$& $\ldots$ & $\ldots$\\\\")
+    if num >= 68:
+        continue
+    lpath = path.basename(fpath). \
+            replace('_','\_'). \
+            replace('@','$@$'). \
+            replace('&','\\&'). \
+            replace('$','\\$'). \
+            replace('%','\\%'). \
+            replace('#','\\#'). \
+            replace('{','\\{'). \
+            replace('}','\\}')
+    f.write("%d & \\texttt{%s} & %s\\\\" % (num - 2, lpath, sizeof_fmt(fsize)))
+    if num > 2 and (num - 1) % 10 == 0:
+        f.write("\\hline")
+    f.write("\n")
+f.write("}\n")
+
+# Used space on tape
+f.write("\\newcommand{\\tapeused}{%s}\n" % (sizeof_fmt(total)))
+
+f.close()
+sys.stderr.write(f"Tape contents file {cntfile} updated.\n")

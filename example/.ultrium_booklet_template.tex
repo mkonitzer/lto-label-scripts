@@ -1,0 +1,90 @@
+%
+%  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+%  Copyright (C) 2022  Marius Konitzer
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+%
+
+\documentclass[a4paper]{scrartcl}
+\usepackage[left=0cm,right=0.2cm,top=0.2cm,bottom=1cm]{geometry}
+\usepackage{units}
+\usepackage{eso-pic}
+\usepackage{xltxtra}
+
+% Font configuration
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+
+\pagestyle{empty}
+
+% Cartridge info
+\include{inc_header}
+\include{inc_stats}
+\include{inc_content}
+
+% Replacements
+% * inc_header
+\ifdefined\tapename\else\newcommand{\tapename}{-- undefined --}\fi
+\ifdefined\tapeserno\else\newcommand{\tapeserno}{-- undefined --}\fi
+\ifdefined\tapetype\else\newcommand{\tapetype}{-- undefined --}\fi
+\ifdefined\tapeformat\else\newcommand{\tapeformat}{-- undefined --}\fi
+\ifdefined\tapewritten\else\newcommand{\tapewritten}{-- undefined --}\fi
+% * inc_stats
+\ifdefined\tapestats\else\newcommand{\tapestats}{unknown&}\fi
+% * inc_content
+\ifdefined\tapecontent\else\newcommand{\tapecontent}{}\fi
+\ifdefined\tapeused\else\newcommand{\tapeused}{}\fi
+
+% Generated stuff
+\newcommand{\tapedesc}{\small\tapetype~{(\tapeformat)}\hfill{S/N:~\texttt{\tapeserno}}}
+
+\begin{document}
+% Folding mark
+\AddToShipoutPicture*{%
+  \AtPageUpperLeft{%
+    \parbox[t][9.9cm][b]{1cm}{%
+      \hspace*{2mm}%
+      \rule{6mm}{0.25pt}%
+    }%
+  }%
+}%
+% Cartridge booklet
+    \begin{minipage}[t][28.5cm]{9.5cm}
+	% * tape header
+	\colorbox{lightgray}{\parbox[c][2.6cm]{9.5cm}{\centering\parbox[c][2.2cm]{9cm}{\vfill
+	    \begin{center}
+		\texttt{\Huge\tapename}
+	    \end{center}\vfill\tapedesc
+	}}}
+	% * tape statistics
+	\fbox{\parbox[t]{9.5cm}{\scriptsize\centering
+		\begin{tabular}{l|l}
+		    \tapestats
+		\end{tabular}
+	}}
+	% * tape contents
+	\begin{center}\scriptsize
+	    \begin{tabular}{r|l|r}
+		\textbf{\#} & \textbf{Name} & \textbf{Size}\\ \hline
+		\tapecontent
+	    \end{tabular}
+	\end{center}\vfill
+	% * tape usage
+	\colorbox{lightgray}{\parbox[c][0.3cm]{9.5cm}{\scriptsize\vfill
+	    \hfill \textbf{Total size:} \tapeused}}
+    \end{minipage}
+\end{document}

@@ -1,0 +1,83 @@
+%
+%  lto-label-scripts – Scripts for generating LTO Ultrium tape labels/inserts
+%  Copyright (C) 2022  Marius Konitzer
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+%
+
+\documentclass[a4paper]{scrartcl}
+\usepackage[left=0.5cm,right=0.5cm,top=1cm,bottom=1cm]{geometry}
+\usepackage{units}
+\usepackage{eso-pic}
+\usepackage{xltxtra}
+\usepackage{rotating}
+
+% Font configuration
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+
+\pagestyle{empty}
+
+% Cartridge info
+\include{inc_header}
+
+% Replacements
+% * inc_header
+\ifdefined\tapename\else\newcommand{\tapename}{-- undefined --}\fi
+\ifdefined\tapeserno\else\newcommand{\tapeserno}{-- undefined --}\fi
+\ifdefined\tapetype\else\newcommand{\tapetype}{-- undefined --}\fi
+\ifdefined\tapeformat\else\newcommand{\tapeformat}{-- undefined --}\fi
+
+% Generated stuff
+\newcommand{\tapedesc}{\small\tapetype~{(\tapeformat)}\hfill{S/N:~\texttt{\tapeserno}}}
+
+\begin{document}
+% Cartridge inlay
+\fbox{\begin{minipage}[t][22.5cm]{10.3cm}
+    % * back
+    \begin{turn}{180}
+    \begin{minipage}[t][10.2cm]{10.3cm}
+	\colorbox{lightgray}{\parbox[c][2.8cm]{10.1cm}{\centering\parbox[c][2.4cm]{9.6cm}{\vfill
+	    \begin{center}
+		\texttt{\Huge\tapename}
+	    \end{center}\vfill
+	    \tapedesc
+	}}}
+    \end{minipage}
+    \end{turn}
+    % * side
+    \begin{turn}{180}
+	\begin{minipage}[t][2.3cm]{10.3cm}
+	    \hrule\vfill
+	    \begin{center}
+		\texttt{\Huge\tapename}
+	    \end{center}
+	    \tapedesc
+	    \vfill\hrule
+	\end{minipage}
+    \end{turn}
+    % * front
+    \begin{minipage}[t][10cm]{10.3cm}
+	\colorbox{lightgray}{\parbox[c][2.6cm]{10.1cm}{\centering\parbox[c][2.2cm]{9.6cm}{\vfill
+	    \begin{center}
+		\texttt{\Huge\tapename}
+	    \end{center}\vfill
+	    \tapedesc
+	}}}\vfill
+    \end{minipage}
+\end{minipage}}
+\end{document}
